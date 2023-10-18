@@ -61,3 +61,34 @@ extension NavigationableViewModel {
     }
     
 }
+extension NavigationableViewModel {
+    
+    private var window: UIWindow? {
+        if #available(iOS 16.0, *) {
+            return UIApplication.shared.connectedScenes
+                .compactMap { $0 as? UIWindowScene }
+                .flatMap { $0.windows }
+                .first(where: \.isKeyWindow)
+        } else {
+            return UIApplication.shared.windows.first(where: \.isKeyWindow)
+        }
+    }
+    
+    public func alert(view: some ControllerableView) {
+        guard let window = window,
+              var rootViewController = window.rootViewController else { return }
+        
+        if let presentedViewController = rootViewController.presentedViewController {
+            rootViewController = presentedViewController
+        }
+        
+        let nextViewController = view.viewController
+        
+        nextViewController.view.backgroundColor = .clear
+        nextViewController.modalPresentationStyle = .overFullScreen
+        nextViewController.modalTransitionStyle = .crossDissolve
+        
+        rootViewController.present(nextViewController, animated: true)
+    }
+    
+}
