@@ -46,7 +46,10 @@ extension NavigationableViewModel {
             nextViewController.modalTransitionStyle = transitionStyle
         }
         
-        viewController?.present(nextViewController, animated: true)
+        let presentingViewController = UINavigationController(rootViewController: nextViewController)
+        presentingViewController.setNavigationBarHidden(true, animated: false)
+        
+        viewController?.present(presentingViewController, animated: true)
     }
     
     public func dismiss() {
