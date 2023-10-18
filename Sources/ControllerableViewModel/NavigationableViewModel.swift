@@ -14,6 +14,7 @@ open class NavigationableViewModel: ObservableObject {
 }
 
 // MARK: - Navigation
+@MainActor
 extension NavigationableViewModel {
     
     public func push(view: some ControllerableView) {
@@ -61,6 +62,8 @@ extension NavigationableViewModel {
     }
     
 }
+
+@MainActor
 extension NavigationableViewModel {
     
     private var window: UIWindow? {
