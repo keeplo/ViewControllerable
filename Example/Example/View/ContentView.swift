@@ -22,25 +22,25 @@ struct FirstView: ControllerableView {
             Button(action: {
                 viewModel.push(view: NumberingView(viewModel: .init()))
             }) {
-                Text("FirstView: Push")
+                Text("Push")
             }
             
             Button(action: {
                 viewModel.present(view: NumberingView(viewModel: .init()))
             }) {
-                Text("FirstView: Default Present")
+                Text("Default Present")
             }
 
             Button(action: {
                 viewModel.present(view: NumberingView(viewModel: .init()), to: .fullScreen, by: .coverVertical)
             }) {
-                Text("FirstView: Full Screen")
+                Text("Full Screen")
             }
             
             Button(action: {
                 viewModel.present(view: NumberingView(viewModel: .init()), to: .custom, by: .coverVertical, with: [.large(), .medium()])
             }) {
-                Text("FirstView: Changable Modal")
+                Text("Changable Modal")
             }
         }
     }
