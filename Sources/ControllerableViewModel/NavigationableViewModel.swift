@@ -14,6 +14,7 @@ open class NavigationableViewModel: ObservableObject {
 }
 
 // MARK: - Navigation
+@MainActor
 extension NavigationableViewModel {
     
     public func push(view: some ControllerableView) {
@@ -46,7 +47,10 @@ extension NavigationableViewModel {
             nextViewController.modalTransitionStyle = transitionStyle
         }
         
-        viewController?.present(nextViewController, animated: true)
+        let presentingViewController = UINavigationController(rootViewController: nextViewController)
+        presentingViewController.setNavigationBarHidden(true, animated: false)
+        
+        viewController?.present(presentingViewController, animated: true)
     }
     
     public func dismiss() {
@@ -55,6 +59,47 @@ extension NavigationableViewModel {
     
     public func popToRoot() {
         viewController?.navigationController?.popToRootViewController(animated: true)
+    }
+    
+}
+
+@MainActor
+extension NavigationableViewModel {
+    
+    private var window: UIWindow? {
+        if #available(iOS 16.0, *) {
+            return UIApplication.shared.connectedScenes
+                .compactMap { $0 as? UIWindowScene }
+                .flatMap { $0.windows }
+                .first(where: \.isKeyWindow)
+        } else {
+            return UIApplication.shared.windows.first(where: \.isKeyWindow)
+        }
+    }
+    
+    public func alert(
+        view: some ControllerableView,
+        to presentationStyle: UIModalPresentationStyle? = .overFullScreen,
+        by transitionStyle: UIModalTransitionStyle? = .crossDissolve
+    ) {
+        guard let window = window,
+              var rootViewController = window.rootViewController else { return }
+        
+        if let presentedViewController = rootViewController.presentedViewController {
+            rootViewController = presentedViewController
+        }
+        
+        let nextViewController = view.viewController
+        nextViewController.view.backgroundColor = .clear
+        
+        if let presentationStyle = presentationStyle {
+            nextViewController.modalPresentationStyle = presentationStyle
+        }
+        if let transitionStyle = transitionStyle {
+            nextViewController.modalTransitionStyle = transitionStyle
+        }
+        
+        rootViewController.present(nextViewController, animated: true)
     }
     
 }
