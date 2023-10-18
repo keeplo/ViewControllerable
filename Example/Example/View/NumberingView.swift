@@ -93,7 +93,7 @@ struct NumberingView: ControllerableView {
                 let viewModel = CustomeAlertViewModel(
                     item: .init(
                         title: "SwiftUI 로 구현된 Alert 예제",
-                        message: "UIKit 으로도 구현가능",
+                        message: "UIKit 으로도 구현가능\n여기는 View Number \(viewModel.number)",
                         completion: {
                             print("얼럿 Completion")
                         }

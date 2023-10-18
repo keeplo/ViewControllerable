@@ -77,7 +77,11 @@ extension NavigationableViewModel {
         }
     }
     
-    public func alert(view: some ControllerableView) {
+    public func alert(
+        view: some ControllerableView,
+        to presentationStyle: UIModalPresentationStyle? = .overFullScreen,
+        by transitionStyle: UIModalTransitionStyle? = .crossDissolve
+    ) {
         guard let window = window,
               var rootViewController = window.rootViewController else { return }
         
@@ -86,10 +90,14 @@ extension NavigationableViewModel {
         }
         
         let nextViewController = view.viewController
-        
         nextViewController.view.backgroundColor = .clear
-        nextViewController.modalPresentationStyle = .overFullScreen
-        nextViewController.modalTransitionStyle = .crossDissolve
+        
+        if let presentationStyle = presentationStyle {
+            nextViewController.modalPresentationStyle = presentationStyle
+        }
+        if let transitionStyle = transitionStyle {
+            nextViewController.modalTransitionStyle = transitionStyle
+        }
         
         rootViewController.present(nextViewController, animated: true)
     }
