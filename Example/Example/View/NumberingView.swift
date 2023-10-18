@@ -88,6 +88,21 @@ struct NumberingView: ControllerableView {
             }) {
                 Text("reStacks")
             }
+            
+            Button(action: {
+                let viewModel = CustomeAlertViewModel(
+                    item: .init(
+                        title: "SwiftUI 로 구현된 Alert 예제",
+                        message: "UIKit 으로도 구현가능",
+                        completion: {
+                            print("얼럿 Completion")
+                        }
+                    )
+                )
+                let view = CustomAlert(viewModel: viewModel)
+                viewModel.alert(view: view)
+            }) {
+                Text("alert")
             }
         }
         .onAppear() {
