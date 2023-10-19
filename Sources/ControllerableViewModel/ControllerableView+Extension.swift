@@ -1,35 +1,38 @@
 //
-//  NavigationableViewModel.swift
+//  File.swift
+//  
 //
-//
-//  Created by 김용우 on 2023/10/17.
+//  Created by 김용우 on 2023/10/19.
 //
 
 import SwiftUI
 
-open class NavigationableViewModel: ObservableObject {
-    public weak var viewController: UIViewController?
+public extension ControllerableView {
     
-    public init() {}
-}
-
-// MARK: - Navigation
-@MainActor
-extension NavigationableViewModel {
-    
-    public func push(view: some ControllerableView) {
-        viewController?.navigationController?.pushViewController(view.viewController, animated: true)
+    var viewController: UIViewController {
+        let viewController = HostingController(rootView: self)
+        self.stateView.viewController = viewController
+        return viewController
     }
     
-    public func pop() {
-        guard let currentViewController = viewController,
-              let navigationController = currentViewController.navigationController else { return }
-        guard navigationController.topViewController == currentViewController else { return }
-            
-        navigationController.popViewController(animated: true)
+    // MARK: ViewController Life Cycle
+    func loadView() {}
+    func viewDidLoad() {}
+    func viewWillAppear() {}
+    func viewDidAppear() {}
+    func viewWillDisappear() {}
+    func viewDidDisappear() {}
+    
+    // MARK: Navigation
+    func push(view: some ControllerableView) {
+        stateView.viewController?.navigationController?.pushViewController(view.viewController, animated: true)
     }
     
-    public func present(
+    func pop() {
+        stateView.viewController?.navigationController?.popViewController(animated: true)
+    }
+    
+    func present(
         view: some ControllerableView,
         to presentationStyle: UIModalPresentationStyle? = nil,
         by transitionStyle: UIModalTransitionStyle? = nil,
@@ -50,21 +53,16 @@ extension NavigationableViewModel {
         let presentingViewController = UINavigationController(rootViewController: nextViewController)
         presentingViewController.setNavigationBarHidden(true, animated: false)
         
-        viewController?.present(presentingViewController, animated: true)
+        stateView.viewController?.present(presentingViewController, animated: true)
     }
     
-    public func dismiss() {
-        viewController?.dismiss(animated: true)
+    func dismiss() {
+        stateView.viewController?.dismiss(animated: true)
     }
     
-    public func popToRoot() {
-        viewController?.navigationController?.popToRootViewController(animated: true)
+    func popToRoot() {
+        stateView.viewController?.navigationController?.popToRootViewController(animated: true)
     }
-    
-}
-
-@MainActor
-extension NavigationableViewModel {
     
     private var window: UIWindow? {
         if #available(iOS 16.0, *) {
@@ -77,7 +75,7 @@ extension NavigationableViewModel {
         }
     }
     
-    public func alert(
+    func presentAlert(
         view: some ControllerableView,
         to presentationStyle: UIModalPresentationStyle? = .overFullScreen,
         by transitionStyle: UIModalTransitionStyle? = .crossDissolve
@@ -101,5 +99,4 @@ extension NavigationableViewModel {
         
         rootViewController.present(nextViewController, animated: true)
     }
-    
 }

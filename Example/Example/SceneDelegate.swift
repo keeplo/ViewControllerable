@@ -26,7 +26,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }()
         
         navigationController.viewControllers = [
-            FirstView(viewModel: FirstViewModel()).viewController,
+            FirstView(stateView: .init()).viewController,
             NumberingView(viewModel: .init()).viewController,
             NumberingView(viewModel: .init()).viewController
         ]
