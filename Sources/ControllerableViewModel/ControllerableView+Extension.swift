@@ -23,13 +23,38 @@ public extension ControllerableView {
     func viewWillDisappear() {}
     func viewDidDisappear() {}
     
-    // MARK: Navigation
+}
+
+// MARK: - Navigation
+public extension ControllerableView {
+    
+    private var window: UIWindow? {
+        if #available(iOS 16.0, *) {
+            return UIApplication.shared.connectedScenes
+                .compactMap { $0 as? UIWindowScene }
+                .flatMap { $0.windows }
+                .first(where: \.isKeyWindow)
+        } else {
+            return UIApplication.shared.windows.first(where: \.isKeyWindow)
+        }
+    }
+    
     func push(view: some ControllerableView) {
         stateView.viewController?.navigationController?.pushViewController(view.viewController, animated: true)
     }
     
     func pop() {
         stateView.viewController?.navigationController?.popViewController(animated: true)
+    }
+    
+    func popToRoot() {
+        stateView.viewController?.navigationController?.popToRootViewController(animated: true)
+    }
+    
+    func restack(views: [any ControllerableView]) {
+        self.popToRoot()
+        let viewControllers = views.compactMap({ $0.viewController })
+        stateView.viewController?.navigationController?.viewControllers.append(contentsOf: viewControllers)
     }
     
     func present(
@@ -56,25 +81,6 @@ public extension ControllerableView {
         stateView.viewController?.present(presentingViewController, animated: true)
     }
     
-    func dismiss() {
-        stateView.viewController?.dismiss(animated: true)
-    }
-    
-    func popToRoot() {
-        stateView.viewController?.navigationController?.popToRootViewController(animated: true)
-    }
-    
-    private var window: UIWindow? {
-        if #available(iOS 16.0, *) {
-            return UIApplication.shared.connectedScenes
-                .compactMap { $0 as? UIWindowScene }
-                .flatMap { $0.windows }
-                .first(where: \.isKeyWindow)
-        } else {
-            return UIApplication.shared.windows.first(where: \.isKeyWindow)
-        }
-    }
-    
     func presentAlert(
         view: some ControllerableView,
         to presentationStyle: UIModalPresentationStyle? = .overFullScreen,
@@ -99,4 +105,9 @@ public extension ControllerableView {
         
         rootViewController.present(nextViewController, animated: true)
     }
+    
+    func dismiss() {
+        stateView.viewController?.dismiss(animated: true)
+    }
+    
 }
