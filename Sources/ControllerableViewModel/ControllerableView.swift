@@ -22,9 +22,20 @@ public protocol ControllerableView: View {
     // MARK: Navigation
     func push(view: some ControllerableView)
     func pop()
-    func present(view: some ControllerableView, to presentationStyle: UIModalPresentationStyle?, by transitionStyle: UIModalTransitionStyle?, with detents: [UISheetPresentationController.Detent]?)
-    func dismiss()
     func popToRoot()
-    func presentAlert(view: some ControllerableView, to presentationStyle: UIModalPresentationStyle?, by transitionStyle: UIModalTransitionStyle?)
+    func restack(views: [any ControllerableView])
+    func present(
+        view: some ControllerableView,
+        to presentationStyle: UIModalPresentationStyle?,
+        by transitionStyle: UIModalTransitionStyle?,
+        with detents: [UISheetPresentationController.Detent]?
+    )
+    func presentAlert(
+        view: some ControllerableView,
+        to presentationStyle: UIModalPresentationStyle?,
+        by transitionStyle: UIModalTransitionStyle?
+    )
+    func dismiss()
+    
 }
 
