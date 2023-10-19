@@ -65,18 +65,18 @@ public extension ControllerableView {
     ) {
         let nextViewController = view.viewController
         
-        if let detents = detents {
-            nextViewController.sheetPresentationController?.detents = detents
-        }
-        if let presentationStyle = presentationStyle {
-            nextViewController.modalPresentationStyle = presentationStyle
-        }
-        if let transitionStyle = transitionStyle {
-            nextViewController.modalTransitionStyle = transitionStyle
-        }
-        
         let presentingViewController = UINavigationController(rootViewController: nextViewController)
         presentingViewController.setNavigationBarHidden(true, animated: false)
+        
+        if let detents = detents {
+            presentingViewController.sheetPresentationController?.detents = detents
+        }
+        if let presentationStyle = presentationStyle {
+            presentingViewController.modalPresentationStyle = presentationStyle
+        }
+        if let transitionStyle = transitionStyle {
+            presentingViewController.modalTransitionStyle = transitionStyle
+        }
         
         stateView.viewController?.present(presentingViewController, animated: true)
     }
