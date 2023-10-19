@@ -9,16 +9,14 @@ import ControllerableViewModel
 
 import SwiftUI
 
-final class NumberingViewModel: NavigationableViewModel {
+final class NumberingViewModel: ObservableObject {
     static var number: Int = 0
     
     let number: Int
     
-    override init() {
+    init() {
         self.number = Self.number
-        
-        super.init()
-                
+                        
         Self.number += 1
         
         print("init \(number)")
@@ -32,6 +30,8 @@ final class NumberingViewModel: NavigationableViewModel {
 
 struct NumberingView: ControllerableView {
     
+    var stateView: StateView = .init()
+    
     @ObservedObject var viewModel: NumberingViewModel
     
     var body: some View {
@@ -40,67 +40,65 @@ struct NumberingView: ControllerableView {
             Text("Number \(viewModel.number)")
             
             Button(action: {
-                viewModel.push(view: NumberingView(viewModel: .init()))
+                self.push(view: NumberingView(viewModel: .init()))
             }) {
                 Text("push")
             }
             
             Button(action: {
-                viewModel.present(view: NumberingView(viewModel: .init()))
+                self.present(view: NumberingView(viewModel: .init()))
             }) {
                 Text("Default Present")
             }
 
             Button(action: {
-                viewModel.present(view: NumberingView(viewModel: .init()), to: .fullScreen, by: .coverVertical)
+                self.present(view: NumberingView(viewModel: .init()), to: .fullScreen, by: .coverVertical)
             }) {
                 Text("Full Screen")
             }
             
             Button(action: {
-                viewModel.present(view: NumberingView(viewModel: .init()), to: .custom, by: .coverVertical, with: [.large(), .medium()])
+                self.present(view: NumberingView(viewModel: .init()), to: .custom, by: .coverVertical, with: [.large(), .medium()])
             }) {
                 Text("Changable Modal")
             }
             
             Button(action: {
-                viewModel.dismiss()
+                self.dismiss()
             }) {
                 Text("dismiss")
             }
             
             Button(action: {
-                viewModel.pop()
+                self.pop()
             }) {
                 Text("pop")
             }
             
             Button(action: {
-                viewModel.popToRoot()
+                self.popToRoot()
             }) {
                 Text("pop to root")
             }
             
             Button(action: {
-                viewModel.popToRoot()
-                viewModel.push(view: NumberingView(viewModel: .init()))
-                viewModel.push(view: NumberingView(viewModel: .init()))
+                self.popToRoot()
+                self.push(view: NumberingView(viewModel: .init()))
+                self.push(view: NumberingView(viewModel: .init()))
             }) {
                 Text("reStacks")
             }
             
             Button(action: {
-                let viewModel = CustomeAlertViewModel(
-                    item: .init(
-                        title: "SwiftUI 로 구현된 Alert 예제",
-                        message: "UIKit 으로도 구현가능\n여기는 View Number \(viewModel.number)",
-                        completion: {
-                            print("얼럿 Completion")
-                        }
-                    )
+                let alertItem = AlertItem(
+                    title: "SwiftUI 로 구현된 Alert 예제",
+                    message: "UIKit 으로도 구현가능\n여기는 View Number \(viewModel.number)",
+                    completion: {
+                        print("얼럿 Completion")
+                    }
                 )
-                let view = CustomAlert(viewModel: viewModel)
-                viewModel.alert(view: view)
+                let view = CustomAlert(stateView: .init(), item: alertItem)
+                self.presentAlert(view: view)
             }) {
                 Text("alert")
             }

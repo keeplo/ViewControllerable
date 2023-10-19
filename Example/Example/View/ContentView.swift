@@ -9,36 +9,32 @@ import ControllerableViewModel
 
 import SwiftUI
 
-final class FirstViewModel: NavigationableViewModel {
-    
-}
-
 struct FirstView: ControllerableView {
     
-    @ObservedObject var viewModel: FirstViewModel
+    var stateView: StateView
     
     var body: some View {
         VStack(spacing: 30) {
             Button(action: {
-                viewModel.push(view: NumberingView(viewModel: .init()))
+                self.push(view: NumberingView(viewModel: .init()))
             }) {
                 Text("Push")
             }
             
             Button(action: {
-                viewModel.present(view: NumberingView(viewModel: .init()))
+                self.present(view: NumberingView(viewModel: .init()))
             }) {
                 Text("Default Present")
             }
 
             Button(action: {
-                viewModel.present(view: NumberingView(viewModel: .init()), to: .fullScreen, by: .coverVertical)
+                self.present(view: NumberingView(viewModel: .init()), to: .fullScreen, by: .coverVertical)
             }) {
                 Text("Full Screen")
             }
             
             Button(action: {
-                viewModel.present(view: NumberingView(viewModel: .init()), to: .custom, by: .coverVertical, with: [.large(), .medium()])
+                self.present(view: NumberingView(viewModel: .init()), to: .custom, by: .coverVertical, with: [.large(), .medium()])
             }) {
                 Text("Changable Modal")
             }

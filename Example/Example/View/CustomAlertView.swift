@@ -9,28 +9,16 @@ import ControllerableViewModel
 
 import SwiftUI
 
-final class CustomeAlertViewModel: NavigationableViewModel {
-    
-    struct Item {
-        let title: String
-        let message: String
-        let completion: () -> Void
-    }
-    
-    let item: Item
-    
-    init(item: Item) {
-        self.item = item
-    }
-    
-    var title: String { item.title }
-    var message: String { item.message }
-    var completion: () -> Void { return item.completion }
+struct AlertItem {
+    let title: String
+    let message: String
+    let completion: () -> Void
 }
 
 struct CustomAlert: ControllerableView {
     
-    @ObservedObject var viewModel: CustomeAlertViewModel
+    var stateView: StateView
+    let item : AlertItem
     
     var body: some View {
         ZStack {
@@ -39,10 +27,10 @@ struct CustomAlert: ControllerableView {
                 .ignoresSafeArea(.all)
             VStack(alignment: .center, spacing: 0) {
                 Spacer()
-                Text(viewModel.title)
+                Text(item.title)
                 Spacer()
                     .frame(height: 11)
-                Text(viewModel.message)
+                Text(item.message)
                     .foregroundColor(.gray)
                 Spacer()
                 Divider()
@@ -50,8 +38,8 @@ struct CustomAlert: ControllerableView {
                 Spacer()
                 Button(
                     action: {
-                        viewModel.dismiss()
-                        viewModel.completion()
+                        self.dismiss()
+                        item.completion()
                     }, label: {
                         HStack {
                             Spacer()
