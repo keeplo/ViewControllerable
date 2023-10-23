@@ -106,8 +106,8 @@ public extension ControllerableView {
         rootViewController.present(nextViewController, animated: true)
     }
     
-    func dismiss() {
-        stateView.viewController?.dismiss(animated: true)
+    func dismiss(completion: (() -> Void)? = nil) {
+        stateView.viewController?.dismiss(animated: true, completion: completion)
     }
     
 }
