@@ -35,7 +35,7 @@ public protocol ControllerableView: View {
         to presentationStyle: UIModalPresentationStyle?,
         by transitionStyle: UIModalTransitionStyle?
     )
-    func dismiss()
+    func dismiss(completion: (() -> Void)?)
     
 }
 
