@@ -15,7 +15,7 @@ struct AlertItem {
     let completion: () -> Void
 }
 
-struct CustomAlert: ControllerableView {
+struct CustomAlert: View, ControllerableView {
     
     var stateView: StateView
     let item : AlertItem

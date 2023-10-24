@@ -28,7 +28,7 @@ final class NumberingViewModel: ObservableObject {
     
 }
 
-struct NumberingView: ControllerableView {
+struct NumberingView: View, ControllerableView {
     
     var stateView: StateView = .init()
     

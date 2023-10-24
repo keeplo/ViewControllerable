@@ -9,7 +9,7 @@ import ControllerableViewModel
 
 import SwiftUI
 
-struct FirstView: ControllerableView {
+struct FirstView: View, ControllerableView {
     
     var stateView: StateView
     

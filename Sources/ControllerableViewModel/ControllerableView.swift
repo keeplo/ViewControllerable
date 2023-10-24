@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public protocol ControllerableView: View {
+public protocol ControllerableView where Self: View {
     
     var stateView: StateView { get set }
         
