@@ -5,7 +5,7 @@
 //  Created by 김용우 on 2023/10/18.
 //
 
-import ControllerableViewModel
+import ViewControllerable
 
 import SwiftUI
 
@@ -15,7 +15,7 @@ struct AlertItem {
     let completion: () -> Void
 }
 
-struct CustomAlert: ControllerableView {
+struct CustomAlert: View, ViewControllerable {
     
     var stateView: StateView
     let item : AlertItem

@@ -1,5 +1,5 @@
 //
-//  ControllerableView.swift
+//  ViewControllerable.swift
 //  
 //
 //  Created by 김용우 on 2023/10/17.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public protocol ControllerableView: View {
+public protocol ViewControllerable where Self: View {
     
     var stateView: StateView { get set }
         
@@ -20,18 +20,18 @@ public protocol ControllerableView: View {
     func viewDidDisappear()
     
     // MARK: Navigation
-    func push(view: some ControllerableView)
+    func push(view: some ViewControllerable)
     func pop()
     func popToRoot()
-    func restack(views: [any ControllerableView])
+    func restack(views: [some ViewControllerable])
     func present(
-        view: some ControllerableView,
+        view: some ViewControllerable,
         to presentationStyle: UIModalPresentationStyle?,
         by transitionStyle: UIModalTransitionStyle?,
         with detents: [UISheetPresentationController.Detent]?
     )
     func presentAlert(
-        view: some ControllerableView,
+        view: some ViewControllerable,
         to presentationStyle: UIModalPresentationStyle?,
         by transitionStyle: UIModalTransitionStyle?
     )

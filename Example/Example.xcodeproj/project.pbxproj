@@ -7,17 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A906931B2AE77C9A00E1A06D /* ViewControllerable in Frameworks */ = {isa = PBXBuildFile; productRef = A906931A2AE77C9A00E1A06D /* ViewControllerable */; };
 		A923E8202ADE5552008B6D9B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A923E81F2ADE5552008B6D9B /* AppDelegate.swift */; };
 		A923E8222ADE5552008B6D9B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A923E8212ADE5552008B6D9B /* SceneDelegate.swift */; };
 		A923E8242ADE5552008B6D9B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A923E8232ADE5552008B6D9B /* ContentView.swift */; };
 		A923E8292ADE5553008B6D9B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A923E8282ADE5553008B6D9B /* Assets.xcassets */; };
 		A923E82C2ADE5553008B6D9B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A923E82A2ADE5553008B6D9B /* LaunchScreen.storyboard */; };
 		A923E8382ADE560F008B6D9B /* NumberingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A923E8372ADE560F008B6D9B /* NumberingView.swift */; };
-		A923E83F2ADE583A008B6D9B /* ControllerableViewModel in Frameworks */ = {isa = PBXBuildFile; productRef = A923E83E2ADE583A008B6D9B /* ControllerableViewModel */; };
 		A9D298002ADF6A2800115A94 /* CustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D297FF2ADF6A2800115A94 /* CustomAlertView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A90693192AE77C6600E1A06D /* ViewControllerable */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = ViewControllerable; path = ..; sourceTree = "<group>"; };
 		A923E81C2ADE5552008B6D9B /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A923E81F2ADE5552008B6D9B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A923E8212ADE5552008B6D9B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -26,7 +27,6 @@
 		A923E82B2ADE5553008B6D9B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A923E82D2ADE5553008B6D9B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A923E8372ADE560F008B6D9B /* NumberingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberingView.swift; sourceTree = "<group>"; };
-		A923E83C2ADE57D6008B6D9B /* ControllerableViewModel */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = ControllerableViewModel; path = ..; sourceTree = "<group>"; };
 		A9D297FF2ADF6A2800115A94 /* CustomAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -35,7 +35,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A923E83F2ADE583A008B6D9B /* ControllerableViewModel in Frameworks */,
+				A906931B2AE77C9A00E1A06D /* ViewControllerable in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,7 +86,7 @@
 		A923E83B2ADE57D6008B6D9B /* Packages */ = {
 			isa = PBXGroup;
 			children = (
-				A923E83C2ADE57D6008B6D9B /* ControllerableViewModel */,
+				A90693192AE77C6600E1A06D /* ViewControllerable */,
 			);
 			name = Packages;
 			sourceTree = "<group>";
@@ -115,7 +115,7 @@
 			);
 			name = Example;
 			packageProductDependencies = (
-				A923E83E2ADE583A008B6D9B /* ControllerableViewModel */,
+				A906931A2AE77C9A00E1A06D /* ViewControllerable */,
 			);
 			productName = Example;
 			productReference = A923E81C2ADE5552008B6D9B /* Example.app */;
@@ -396,9 +396,9 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		A923E83E2ADE583A008B6D9B /* ControllerableViewModel */ = {
+		A906931A2AE77C9A00E1A06D /* ViewControllerable */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = ControllerableViewModel;
+			productName = ViewControllerable;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

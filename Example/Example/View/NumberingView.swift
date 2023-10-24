@@ -5,7 +5,7 @@
 //  Created by 김용우 on 2023/10/17.
 //
 
-import ControllerableViewModel
+import ViewControllerable
 
 import SwiftUI
 
@@ -28,7 +28,7 @@ final class NumberingViewModel: ObservableObject {
     
 }
 
-struct NumberingView: ControllerableView {
+struct NumberingView: View, ViewControllerable {
     
     var stateView: StateView = .init()
     
