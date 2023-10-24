@@ -4,21 +4,21 @@
 import PackageDescription
 
 let package = Package(
-    name: "ControllerableViewModel",
+    name: "ViewControllerable",
     platforms: [
         .iOS(.v15)
     ],
     products: [
         .library(
-            name: "ControllerableViewModel",
-            targets: ["ControllerableViewModel"]),
+            name: "ViewControllerable",
+            targets: ["ViewControllerable"]),
     ],
     targets: [
         .target(
-            name: "ControllerableViewModel",
+            name: "ViewControllerable",
             dependencies: []),
         .testTarget(
-            name: "ControllerableViewModelTests",
-            dependencies: ["ControllerableViewModel"]),
+            name: "ViewControllerableTests",
+            dependencies: ["ViewControllerable"]),
     ]
 )

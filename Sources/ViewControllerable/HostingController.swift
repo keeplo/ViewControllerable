@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public class HostingController<Content: ControllerableView & View>: UIHostingController<Content> {
+public class HostingController<Content: ViewControllerable & View>: UIHostingController<Content> {
     
     public override func loadView() {
         super.loadView()

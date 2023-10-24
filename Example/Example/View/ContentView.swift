@@ -5,11 +5,11 @@
 //  Created by 김용우 on 2023/10/17.
 //
 
-import ControllerableViewModel
+import ViewControllerable
 
 import SwiftUI
 
-struct FirstView: View, ControllerableView {
+struct FirstView: View, ViewControllerable {
     
     var stateView: StateView
     
