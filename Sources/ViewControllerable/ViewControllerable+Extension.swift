@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  ViewControllerable.swift
 //  
 //
 //  Created by 김용우 on 2023/10/19.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public extension ControllerableView {
+public extension ViewControllerable {
     
     var viewController: UIViewController {
         let viewController = HostingController(rootView: self)
@@ -26,7 +26,7 @@ public extension ControllerableView {
 }
 
 // MARK: - Navigation
-public extension ControllerableView {
+public extension ViewControllerable {
     
     private var window: UIWindow? {
         if #available(iOS 16.0, *) {
@@ -39,7 +39,7 @@ public extension ControllerableView {
         }
     }
     
-    func push(view: some ControllerableView) {
+    func push(view: some ViewControllerable) {
         stateView.viewController?.navigationController?.pushViewController(view.viewController, animated: true)
     }
     
@@ -51,14 +51,14 @@ public extension ControllerableView {
         stateView.viewController?.navigationController?.popToRootViewController(animated: true)
     }
     
-    func restack(views: [any ControllerableView]) {
+    func restack(views: [some ViewControllerable]) {
         self.popToRoot()
         let viewControllers = views.compactMap({ $0.viewController })
         stateView.viewController?.navigationController?.viewControllers.append(contentsOf: viewControllers)
     }
     
     func present(
-        view: some ControllerableView,
+        view: some ViewControllerable,
         to presentationStyle: UIModalPresentationStyle? = nil,
         by transitionStyle: UIModalTransitionStyle? = nil,
         with detents: [UISheetPresentationController.Detent]? = nil
@@ -82,7 +82,7 @@ public extension ControllerableView {
     }
     
     func presentAlert(
-        view: some ControllerableView,
+        view: some ViewControllerable,
         to presentationStyle: UIModalPresentationStyle? = .overFullScreen,
         by transitionStyle: UIModalTransitionStyle? = .crossDissolve
     ) {
